@@ -20,8 +20,8 @@ class Person:
         self.hp = hp
         self.maxmp = mp
         self.mp = mp
-        self.atkl = atk - 10
-        self.atkh = atk + 10
+        self.atkl = atk - 20
+        self.atkh = atk + 20
         self.df = df
         self.magic = magic
         self.items = items
@@ -84,6 +84,30 @@ class Person:
         for item in self.items:
             print("    " + str(i) + ".", item["item"].name + ":", item["item"].description, " (x" + str(item["quantity"]) + ")")
             i += 1
+    
+    def get_enemy_stats(self):
+        hp_bar = ""
+        bar_ticks = (self.hp / self.maxhp) * 100 / 2 
+        
+        while bar_ticks > 0:
+            hp_bar += "█"
+            bar_ticks -= 1
+        
+        while len(hp_bar) < 50:
+            hp_bar += " "
+        
+        hp_string = str(self.hp) + "/" + str(self.maxhp)
+        current_hp = ""
+        if len(hp_string) < 11:
+            decreased = 11 - len(hp_string)
+            while decreased > 0:
+                current_hp += " "
+                decreased -= 1
+            current_hp += hp_string
+        else:
+            current_hp = hp_string
+        print("                       __________________________________________________")
+        print(bcolors.BOLD + str(self.name) + "      " + current_hp + " |" + bcolors.FAIL + hp_bar + bcolors.ENDC + "|") 
     
     def get_stats(self):
         hp_bar = ""
