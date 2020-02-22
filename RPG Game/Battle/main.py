@@ -33,9 +33,13 @@ player_items = [{"item": potion, "quantity": 3}, {"item": hipotion, "quantity": 
 player1 = Person("Valos  ", 3000, 100, 200, 30, player_spells, player_items)
 player2 = Person("Einaras", 3100, 100, 200, 30, player_spells, player_items)
 player3 = Person("Robot  ", 3200, 100, 200, 30, player_spells, player_items)
-enemy = Person("Jack", 12000, 400, 800, 25, [], [])
+
+enemy1 = Person("Goblin", 1200, 130, 500, 200, [], [])
+enemy2 = Person("Lich", 12000, 400, 800, 25, [], [])
+enemy3 = Person("Elf", 1200, 130, 800, 200, [], [])
 
 players = [player1, player2, player3]
+enemies = [enemy1, enemy2, enemy3]
 
 running = True
 i = 0
@@ -49,7 +53,8 @@ while running:
     for player in players:
         player.get_stats()
     
-    enemy.get_enemy_stats()
+    for enemy in enemies:
+        enemy.get_enemy_stats()
     
     for player in players:
         player.choose_action()
@@ -59,6 +64,7 @@ while running:
         #if the choice is 1 then it will be a Attack
         if index == 0:
             dmg = player.generate_damage()
+            player.choose_target(enemies)
             enemy.take_damage(dmg)
             print(bcolors.CYELLOW2 +  'You attacked for: ', dmg, "points of damage" + bcolors.ENDC)
         elif index == 1:
@@ -132,3 +138,4 @@ while running:
         print(bcolors.FAIL + "You Died!" + bcolors.ENDC)
         running = False
         
+        6:00 toliau
