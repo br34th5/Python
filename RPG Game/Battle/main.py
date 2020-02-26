@@ -132,10 +132,22 @@ while running:
     players[target].take_damage(enemy_dmg)
     print(bcolors.CYELLOW2 + "Enemy attacks for: ", enemy_dmg, "points of damage" + bcolors.ENDC)
 
+    defeated_enemies = 0
+    defeated_players = 0
     
-    if enemy.get_hp() == 0:
+    for enemy in enemies:
+        if enemy.get_hp() == 0:
+            defeated_enemies += 1
+    for player in players:
+        if player.get_hp() == 0:
+            defeated_players += 1
+
+    if defeated_enemies == 2:
         print(bcolors.OKGREEN + "You Win!" + bcolors.ENDC)
         running = False
-    elif player.get_hp() == 0:
-        print(bcolors.FAIL + "You Died!" + bcolors.ENDC)
+        
+    elif defeated_players == 2:
+        print(bcolors.FAIL + "Your enemies have defeated you!" + bcolors.ENDC)
         running = False
+        
+        4:20
