@@ -26,6 +26,7 @@ grenade = Item("Grenade", "attack", "Deals 500 damage", 500)
 
 # Instantiate People
 player_spells = [fire, thunder, blizzard, meteor, quake, cure, cura]
+enemy_spells = [fire, meteor, cure]
 player_items = [{"item": potion, "quantity": 3}, {"item": hipotion, "quantity": 3},
                 {"item": superpotion, "quantity": 3}, {"item": elixer, "quantity": 1},
                 {"item": hielixer, "quantity": 1}, {"item": grenade, "quantity": 1}]
@@ -34,9 +35,9 @@ player1 = Person("Valos  ", 3000, 100, 200, 30, player_spells, player_items)
 player2 = Person("Einaras", 3100, 100, 200, 30, player_spells, player_items)
 player3 = Person("Robot  ", 3200, 100, 200, 30, player_spells, player_items)
 
-enemy1 = Person("Dog ", 1200, 130, 500, 200, [], [])
-enemy2 = Person("Lich", 12000, 400, 800, 25, [], [])
-enemy3 = Person("Elf ", 1200, 130, 800, 200, [], [])
+enemy1 = Person("Dog ", 1200, 130, 500, 200, enemy_spells, [])
+enemy2 = Person("Lich", 12000, 400, 800, 25, enemy_spells, [])
+enemy3 = Person("Elf ", 1200, 130, 800, 200, enemy_spells, [])
 
 players = [player1, player2, player3]
 enemies = [enemy1, enemy2, enemy3]
@@ -140,14 +141,8 @@ while running:
         else: 
             print ("Press 1 for Attack, 2 for Magic, 3 for Items")
             continue
-
-    enemy_choice = 1
-    target = random.randrange(0, 3)
-
-    enemy_dmg = enemies[0].generate_damage()
-    players[target].take_damage(enemy_dmg)
-    print(bcolors.CYELLOW2 + "Enemy attacks for: ", enemy_dmg, "points of damage" + bcolors.ENDC)
-
+    
+    #check if battle is over
     defeated_enemies = 0
     defeated_players = 0
     
@@ -158,11 +153,29 @@ while running:
         if player.get_hp() == 0:
             defeated_players += 1
 
+    #check if player won
     if defeated_enemies == 2:
         print(bcolors.OKGREEN + "You Win!" + bcolors.ENDC)
         running = False
-        
+
+    #check if enemy won    
     elif defeated_players == 2:
         print(bcolors.FAIL + "Your enemies have defeated you!" + bcolors.ENDC)
         running = False
+    
+    #enemy attack phase
+    for enemy in enemies:
+        enemy_choice = random.randrange(0, 3)
         
+        if enemy_choice == 0:
+            #chose attack
+            target = random.randrange(0, 3)
+            enemy_dmg = enemy.generate_damage()
+            #chose target
+            players[target].take_damage(enemy_dmg)
+            print(bcolors.CYELLOW2 + enemy.name.replace(" ", "") + " attacks " + players[target].name.replace(" ", "") + " for", enemy_dmg, "points of damage" + bcolors.ENDC)
+        elif enemy_choice == 1:
+            spell, magic_dmg = enemy.choose_enemy_spell()
+            print("Enemy chose", spell, "damage is: ", magic_dmg)
+
+        vid 12:25
