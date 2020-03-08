@@ -14,6 +14,7 @@ quake = Spell("Quake", 20, 600, "Black")
 # White Magic
 cure = Spell("Cure", 10, 500, "White")
 cura = Spell("Cura", 20, 1000, "White")
+curaga = Spell("Curaga", 50, 6000, "White")
 
 # Create some Items
 potion = Item("Potion", "potion", "Heals for 250 HP", 250)
@@ -26,7 +27,7 @@ grenade = Item("Grenade", "attack", "Deals 500 damage", 500)
 
 # Instantiate People
 player_spells = [fire, thunder, blizzard, meteor, quake, cure, cura]
-enemy_spells = [fire, meteor, cure]
+enemy_spells = [fire, meteor, curaga]
 player_items = [{"item": potion, "quantity": 3}, {"item": hipotion, "quantity": 3},
                 {"item": superpotion, "quantity": 3}, {"item": elixer, "quantity": 1},
                 {"item": hielixer, "quantity": 1}, {"item": grenade, "quantity": 1}]
@@ -179,17 +180,15 @@ while running:
             spell, magic_dmg = enemy.choose_enemy_spell()
             enemy.reduce_mp(spell.cost)
             
-            if spell.type == "white":
+            #sugaisau 1h kol supratau, kad White ir white yra skirtumas... 
+            if spell.type == "White":
                 enemy.heal(magic_dmg)
-                print(bcolors.OKBLUE + "\n" + spell.name + " heals " + enemy.name + " for", str(magic_dmg), "HP." + bcolors.ENDC)
-            elif spell.type == "black":
+                print(bcolors.OKBLUE + spell.name + " heals " + enemy.name.replace(" ", "") + " for", str(magic_dmg), "HP." + bcolors.ENDC)
+            elif spell.type == "Black":
                 target = random.randrange(0, 2)
                 players[target].take_damage(magic_dmg)
                 
-                print(bcolors.OKBLUE + "\n" + enemy.name.replace(" ", "") + "'s " + spell.name + " deals", str(magic_dmg), "magic damage to " + players[target].name.replace(" ", "") + bcolors.ENDC)
+                print(bcolors.OKBLUE + enemy.name.replace(" ", "") + "'s " + spell.name + " deals", str(magic_dmg), "magic damage to " + players[target].name.replace(" ", "") + bcolors.ENDC)
                 if players[target].get_hp() == 0:
                     print(players[target].name.replace(" ", "") + "has died")
                     del players[player]
-            #print("Enemy chose", spell, "damage is: ", magic_dmg)
-
-        #vid 12:25-19;50
