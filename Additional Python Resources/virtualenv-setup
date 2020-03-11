@@ -1,0 +1,8 @@
+pip3 install virtualenv
+CD C:\Py_Projects
+#Creating virtual envrionment
+virtualenv testenv
+#Activating virtual environment
+testenv\Scripts\activate
+#Now you are working in virtual environment:
+(testenv) C:\Py_Projects>
