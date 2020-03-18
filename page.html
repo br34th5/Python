@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>
+        Ecosia: IP Blocked
+    </title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <noscript>
+        <style>
+            .submit-button {
+    display: none;
+}
+        </style>
+    </noscript>
+    <style>
+    body {
+    background: #f6f6f6;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.panel-warning {
+    margin-top: 30px;
+    background: #FCF8E3;
+    padding: 10px 0;
+    border: 1px solid #FBEED5;
+    border-radius: 4px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.panel-body {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+.panel-no-script {
+    margin-top: 10px;
+}
+
+.error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    padding: 20px 30px;
+    margin-bottom: 15px;
+}
+    </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
+    
+</head>
+<body>
+<div class="container">
+    
+<p>
+  <strong>
+    To continue, please solve the challenge below:
+  </strong>
+  <br>
+  Our systems have detected unusual traffic from your computer network. This page checks to see if it's really you sending the requests and not a robot.
+</p>
+<div class="panel-warning">
+    <div class="panel-body">
+      <form method="POST">
+  <div class="g-recaptcha" data-sitekey="6LeRpPkSAAAAAF-be4gIZMtGDVUx8CXlGu5-bV_5" data-callback="trackCaptchaSuccess"></div>
+  <br/>
+  <input class="submit-button" type="submit" value="Submit">
+</form>
+    </div>
+</div>
+<div class="panel-no-script panel-body">
+  <noscript>
+  Please enable JavaScript to get a reCAPTCHA challenge.
+</noscript>
+</div>
+
+</div>
+<script>
+    window.messageBus = window.messageBus || [];
+    window.trackCaptchaSuccess = () => {
+        window.messageBus.push({ name: 'captcha_success' });
+    }
+</script>
+<script src="https://analytics.ecosia.org/analytics.js" async></script>
+
+
+</body>
+</html>
