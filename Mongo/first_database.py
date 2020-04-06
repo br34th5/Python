@@ -14,4 +14,11 @@ user1 = {"username": "Einaras", "password": "123aasd",
          }
 #methods of a collection:
 user_id = users.insert_one(user1).inserted_id
-user_id
+users = [{"username": "corsair", "password": "12345"},
+         {"username": "msi", "password": "red"}]
+
+logins = db.users
+inserted = logins.insert_many(users)
+inserted.inserted_ids
+
+inserted.inserted_ids
